@@ -28,10 +28,11 @@ def home_view(request, *args, **kwargs):
 
 
 @api_view(['POST'])  # http method the client === POST
-@authentication_classes([SessionAuthentication])
+# @authentication_classes([SessionAuthentication])
 @permission_classes([IsAuthenticated])
 def tweet_create_view(request, *args, **kwargs):
-    serializer = TweetCreateSerializer(data=request.POST)
+    print(request.user)
+    serializer = TweetCreateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):  # send back what the error is
         serializer.save(user=request.user)
         return Response(serializer.data, status=201)
@@ -68,6 +69,11 @@ def tweet_create_view_pure_django(request, *args, **kwargs):
 @api_view(['GET'])  # http method the client === POST
 def tweet_list_view(request, *args, **kwargs):
     qs = Tweet.objects.all()  # grab all objects in Tweet
+    username = request.GET.get('username')  # ?username=root
+    if username != None:
+        # filter that username w/o case sensitive
+        qs = qs.filter(user__username__iexact=username)
+
     serializer = TweetSerializer(qs, many=True)
     return Response(serializer.data)
 

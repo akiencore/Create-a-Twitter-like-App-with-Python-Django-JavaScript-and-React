@@ -1,7 +1,10 @@
-//import {loadTweets} from './lookup'
-import {createTweet, loadTweets} from './lookup'
+//import {createTweet, loadTweets} from './components'
+import { backendLookup } from "./components";
 
 export {
-    createTweet, //new
+  /*
+    createTweet,
     loadTweets
-}
+    */
+  backendLookup,
+};
