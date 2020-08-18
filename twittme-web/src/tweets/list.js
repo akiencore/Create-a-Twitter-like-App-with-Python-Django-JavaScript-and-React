@@ -8,6 +8,7 @@ export function TweetsList(props) {
   //console.log(props.username)
   const [tweetsInit, setTweetsInit] = useState([]);
   const [tweets, setTweets] = useState([]);
+  const [nextUrl, setNextUrl] = useState(null); 
 
   const [tweetsDidSet, setTweetsDidSet] = useState(false);
 
@@ -22,7 +23,8 @@ export function TweetsList(props) {
     if (tweetsDidSet === false) {
       const handleTweetListLookup = (response, status) => {
         if (status === 200) {
-          setTweetsInit(response);
+          setNextUrl(response.next);
+          setTweetsInit(response.results);
           setTweetsDidSet(true);
         } else {
           alert("There was an error");
@@ -42,14 +44,59 @@ export function TweetsList(props) {
     setTweets(updateFinalTweets); //update status
   };
 
-  return tweets.map((item, index) => {
-    return (
-      <Tweet
-        tweet={item}
-        didRetweet={handleDidRetweet} //new
-        className="my-5 py-5 border bg-white text-dark"
-        key={`${index}-{item.id}`}
-      />
-    );
-  });
+  const handleLoadNext = (event) => {
+    event.preventDefault()
+    if (nextUrl !== null) {
+      const handleLoadNextResponse = (response, status) =>{
+        if (status === 200){
+          setNextUrl(response.next)
+          const newTweets = [...tweets].concat(response.results)
+          setTweetsInit(newTweets)
+          setTweets(newTweets)
+        } else {
+          alert("There was an error")
+        }
+      }
+      apiTweetList(props.username, handleLoadNextResponse, nextUrl)
+    }
+  }
+
+  /*
+  return (
+    <React.Fragment>
+      {tweets.map((item, index) => {
+        return (
+          <Tweet
+            tweet={item}
+            didRetweet={handleDidRetweet}
+            className="my-5 py-5 border bg-white text-dark"
+            key={`${index}-{item.id}`}
+          />
+        );
+      })}
+      {nextUrl !== null && (
+        <button className="btn btn-outline-primary">Load next</button>
+      )}
+    </React.Fragment>
+  );
+  */
+  return (
+    <React.Fragment>
+      {tweets.map((item, index) => {
+        return (
+          <Tweet
+            tweet={item}
+            didRetweet={handleDidRetweet}
+            className="my-5 py-5 border bg-white text-dark"
+            key={`${index}-{item.id}`}
+          />
+        );
+      })}
+      {nextUrl !== null && (
+        <button onClick={handleLoadNext} className="btn btn-outline-primary">
+          Load next
+        </button>
+      )}
+    </React.Fragment>
+  );
 }

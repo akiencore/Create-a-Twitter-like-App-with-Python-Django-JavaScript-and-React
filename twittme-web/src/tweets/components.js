@@ -1,14 +1,31 @@
-import React, {
-  useState,
-  useEffect, //new
-} from "react";
-
+import React, { useState, useEffect } from "react";
 import { TweetsList } from "./list";
-
 import { TweetCreate } from "./create";
+import { apiTweetDetail } from "./lookup";
+import { Tweet } from "./detail";
+import { FeedList } from "./feed";  //new
 
-import { apiTweetDetail } from "./lookup"; //new
-import { Tweet } from "./detail"; //new
+export function FeedComponent(props) {
+  const [newTweets, setNewTweets] = useState([]);
+
+  const canTweet = props.canTweet === "false" ? false : true;
+
+  const handleNewTweet = (newTweet) => {
+    let tempNewTweets = [...newTweets];
+
+    tempNewTweets.unshift(newTweet);
+    setNewTweets(tempNewTweets);
+  };
+
+  return (
+    <div className={props.className}>
+      {canTweet === true && (
+        <TweetCreate didTweet={handleNewTweet} className="col-12 mb-3" />
+      )}
+      <FeedList newTweets={newTweets} {...props} />
+    </div>
+  );
+}
 
 export function TweetsComponent(props) {
   const [newTweets, setNewTweets] = useState([]);
