@@ -1,4 +1,7 @@
 # Create-a-Twitter-like-App-with-Python-Django-JavaScript-and-React
+
+![alt text](https://github.com/akiencore/Create-a-Twitter-like-App-with-Python-Django-JavaScript-and-React/blob/master/TLP_Abstract.png)
+
 This project follows the tutorial of CodingEntrepreneurs
 
 * original Youtube tutorial: https://www.youtube.com/watch?v=f1R_bykXHGE
