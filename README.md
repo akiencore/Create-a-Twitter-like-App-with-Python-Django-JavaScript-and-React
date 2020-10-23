@@ -11,8 +11,6 @@ This project follows the tutorial of CodingEntrepreneurs
     * Practice how to develop an application with similar functions to Twitter
     * For example, User and User Profile, tweet(blog) and Tweet Detailed Page
     
-</br>
-
 * Programming Languages: 
     * JavaScript
     * Python
