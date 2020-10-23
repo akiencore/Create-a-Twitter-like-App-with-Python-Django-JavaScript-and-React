@@ -2,8 +2,6 @@
 This project follows the tutorial of CodingEntrepreneurs
 
 * original Youtube tutorial: https://www.youtube.com/watch?v=f1R_bykXHGE
-  
-</br>
 
 * work log: https://www.yuque.com/akiencore/qgdgg5/uiawgw
 
@@ -25,10 +23,6 @@ This project follows the tutorial of CodingEntrepreneurs
    
 * JS library: React.js
   
-</br>
-
 * Operating System: Linux  
-
-</br>
 
 * Software Framework: Django
