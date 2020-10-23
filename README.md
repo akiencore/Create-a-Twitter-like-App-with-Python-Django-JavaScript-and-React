@@ -19,8 +19,6 @@ This project follows the tutorial of CodingEntrepreneurs
     * CSS
     * HTML
    
-</br>
-   
 * JS library: React.js
   
 * Operating System: Linux  
